@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 
 import Title from './Title';
 import AddTaskBar from './AddTaskBar';
-// import TaskTable from './TaskTable';
+import TaskTable from './TaskTable';
 import TaskRow from './TaskRow';
+import Button from './Button';
 
 import generateId from './generateId';
+
 
 function Todo() {
   const [tasks, setTask] = useState([
@@ -31,7 +33,7 @@ function Todo() {
     setText(e.target.value);
   }
 
-  const handleAddTask = function(e) {
+  const AddTask = function(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
 
@@ -55,16 +57,20 @@ function Todo() {
   return (
     <div className="Todo">
       <Title />
-      <AddTaskBar value={text} change={handleChange} keyPress={handleAddTask}  />
-      <table>
-        <tbody>
-          {
-            tasks.map(task => (
-              <TaskRow key={task.id} name={task.name} />
-            ))
-          }
-        </tbody>
-      </table>
+      <AddTaskBar value={text} change={handleChange} keyPress={AddTask}  />
+      <TaskTable>
+        {
+          tasks.map(task => (
+            <tr key={task.id}>
+              <td>
+                <TaskRow name={task.name} />
+                <Button button="Edit" />
+                <Button button="Delete" /> 
+              </td>
+            </tr>
+          ))
+        }
+      </TaskTable>
     </div>
   );
 }
