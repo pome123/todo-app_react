@@ -39,6 +39,10 @@ function Todo() {
       e.preventDefault();
       // console.log('hoge');
 
+      if (text === '') {
+        return;
+      }
+      
       setTask([
         ...tasks,
         {
