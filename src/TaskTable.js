@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 
-// import TaskRow from './TaskRow';
-import Button from './Button';
+import TaskRow from './TaskRow';
 
 
-function TaskTable(props) {
+function TaskTable() {
   const [tasks, setTask] = useState([
     {
       id: "rfiho6voxf",
@@ -26,15 +25,11 @@ function TaskTable(props) {
   return (
     <table>
       <tbody>
-        {tasks.map(task => (
-          <tr>
-            <td>
-              <input className="task" type="text" value={task.name} disabled />
-              <Button value="Edit" />
-              <Button value="Delete" />
-            </td>
-          </tr>
-        ))}
+        {
+          tasks.map(task => (
+            <TaskRow key={task.id} name={task.name} />
+          ))
+        }
       </tbody>
     </table>
   );

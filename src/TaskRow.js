@@ -6,7 +6,7 @@ function TaskRow(props) {
   return (
     <tr>
       <td>
-        <input className="task" type="text" value={props.task} disabled />
+        <input className="task" type="text" value={props.name} disabled />
         <Button value="Edit" />
         <Button value="Delete" />
       </td>
