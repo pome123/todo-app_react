@@ -54,6 +54,10 @@ function Todo() {
     }
   }
 
+  const deleteTask = function () {
+    console.log('hoge');
+  }
+
   return (
     <div className="Todo">
       <Title />
@@ -65,7 +69,7 @@ function Todo() {
               <td>
                 <TaskRow name={task.name} />
                 <Button button="Edit" />
-                <Button button="Delete" /> 
+                <Button button="Delete" click={deleteTask} /> 
               </td>
             </tr>
           ))
