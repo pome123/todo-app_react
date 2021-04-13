@@ -9,7 +9,7 @@ function Todo() {
       <Title />
       <AddTaskBar />
       <TaskTable>
-        <TaskRow />
+        {/* <TaskRow /> */}
       </TaskTable>
     </div>
   );

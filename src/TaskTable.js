@@ -1,7 +1,10 @@
+import TaskRow from './TaskRow';
 function TaskTable(props) {
   return (
     <table>
-      {props.children}
+      <tbody>
+        <TaskRow task="Walk the dog" />
+      </tbody>
     </table>
   );
 }
