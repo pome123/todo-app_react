@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import Title from './Title';
-// import AddTaskBar from './AddTaskBar';
+import AddTaskBar from './AddTaskBar';
 // import TaskTable from './TaskTable';
 import TaskRow from './TaskRow';
 
@@ -37,7 +37,6 @@ function Todo() {
   const handleAddTask = function(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
-      // console.log('hoge');
 
       if (text === '') {
         return;
@@ -59,11 +58,7 @@ function Todo() {
   return (
     <div className="Todo">
       <Title />
-      {/* <AddTaskBar /> */}
-      <form>
-        {/* <input type="text" value={text} onChange={handleChange} /> */}
-        <input type="text" value={text} onChange={handleChange} onKeyPress={handleAddTask} />
-      </form>
+      <AddTaskBar value={text} change={handleChange} keyPress={handleAddTask}  />
       <table>
         <tbody>
           {
