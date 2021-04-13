@@ -5,6 +5,8 @@ import AddTaskBar from './AddTaskBar';
 // import TaskTable from './TaskTable';
 import TaskRow from './TaskRow';
 
+import generateId from './generateId';
+
 function Todo() {
   const [tasks, setTask] = useState([
     {
@@ -27,11 +29,6 @@ function Todo() {
 
   const handleChange = function(e) {
     setText(e.target.value);
-  }
-
-
-  function generateId() {
-    return Math.random().toString(36).substring(2);
   }
 
   const handleAddTask = function(e) {
