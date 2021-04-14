@@ -54,8 +54,9 @@ function Todo() {
     }
   }
 
-  const deleteTask = function () {
-    console.log('hoge');
+  const deleteTask = function (e) {
+    tasks.splice(e, 1);
+    setTask([...tasks]);
   }
 
   return (
@@ -68,8 +69,8 @@ function Todo() {
             <tr key={task.id}>
               <td>
                 <TaskRow name={task.name} />
-                <Button button="Edit" />
-                <Button button="Delete" click={deleteTask} /> 
+                <Button button="Edit" class="button" />
+                <Button button="Delete" class="button delete" click={deleteTask} /> 
               </td>
             </tr>
           ))
