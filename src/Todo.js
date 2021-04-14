@@ -40,7 +40,7 @@ function Todo() {
       if (text === '') {
         return;
       }
-      
+
       setTask([
         ...tasks,
         {
@@ -55,8 +55,19 @@ function Todo() {
   }
 
   const deleteTask = function (e) {
-    tasks.splice(e, 1);
-    setTask([...tasks]);
+    const clickedDeleteButton = e.target.previousSibling.previousSibling.value;
+
+    let index;
+
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].name === clickedDeleteButton) {
+        index = i;
+      }
+    }
+
+    const latestTasks = [...tasks];
+    latestTasks.splice(index, 1);
+    setTask(latestTasks);
   }
 
   return (
