@@ -79,7 +79,7 @@ function Todo() {
   }
 
   const handleButtonClick = function (e) {
-    const clickedTask = e.target.parentNode.firstElementChild;
+    const clickedTask = e.target.parentNode.firstElementChild.firstElementChild;
 
     let index;
     for (let i = 0; i < tasks.length; i++) {
