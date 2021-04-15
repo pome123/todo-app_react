@@ -105,7 +105,6 @@ function Todo() {
 
     const clickedTask = task[index];
     clickedTask.disabled = false;
-    console.log(clickedTask.disabled);
     
     clickedTask.addEventListener('focusout', (e) => {
       clickedTask.disabled = true;
@@ -113,7 +112,6 @@ function Todo() {
   }
 
   const handleChangeEditTask = function (e) {
-    console.log(e);
     const id = e.target.getAttribute('data-id');
 
     setTask(tasks.map((task) => {
