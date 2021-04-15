@@ -68,12 +68,8 @@ function Todo() {
     }
 
     const allTask = [...tasks];
-
     e.target.classList.contains('complete') ? allTask[index].complete = true : allTask[index].complete = false;
-
     setTask(allTask);
-
-    console.log(tasks);
   }
 
   const handleButtonClick = function (e) {
