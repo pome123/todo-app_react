@@ -29,7 +29,7 @@ function Todo() {
   ]);
   const [text, setText] = useState('');
 
-  const handleChange = function(e) {
+  const handleChangeAddTask = function(e) {
     setText(e.target.value);
   }
 
@@ -54,34 +54,50 @@ function Todo() {
     }
   }
 
-  const deleteTask = function (e) {
-    const clickedDeleteButton = e.target.previousSibling.previousSibling.value;
+
+  const handleButtonClick = function (e) {
+    const clickedTask = e.target.parentNode.firstElementChild;
 
     let index;
-
     for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].name === clickedDeleteButton) {
+      if (tasks[i].name === clickedTask.value) {
         index = i;
       }
     }
 
-    const latestTasks = [...tasks];
-    latestTasks.splice(index, 1);
-    setTask(latestTasks);
+    if (e.target.classList.contains('js-delete') === true) {
+      const allTask = [...tasks];
+      allTask.splice(index, 1);
+      setTask(allTask);
+      return;
   }
 
+    // if (e.target.classList.contains('js-edit') === true) {
+    //   console.dir(clickedTask);
+    //   clickedTask.disabled = false;
+
+    //   let edittedTask = tasks[index].name;
+    //   edittedTask = editText;
+    //   setTask([...tasks]);
+    //   setEditText(edittedTask)
+      
+    //   clickedTask.addEventListener('focusout', (e) => {
+    //     clickedTask.disabled = true;
+    //   });
+    // }
+  }
   return (
     <div className="Todo">
       <Title />
-      <AddTaskBar value={text} change={handleChange} keyPress={AddTask}  />
+      <AddTaskBar value={text} change={handleChangeAddTask} keyPress={AddTask}  />
       <TaskTable>
         {
           tasks.map(task => (
             <tr key={task.id}>
               <td>
                 <TaskRow name={task.name} />
-                <Button button="Edit" class="button" />
-                <Button button="Delete" class="button delete" click={deleteTask} /> 
+                <Button button="Edit" class="button js-edit" click={handleButtonClick} />
+                <Button button="Delete" class="button js-delete" click={handleButtonClick} /> 
               </td>
             </tr>
           ))
