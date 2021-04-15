@@ -60,27 +60,29 @@ function Todo() {
   }
 
   const completedTask = function (e) {
-    const clickedTask = e.target.parentNode.firstElementChild;
-    clickedTask.classList.toggle('complete')
+    const clickedTask = e.target;
+    const id = clickedTask.getAttribute('data-id');
+
+    clickedTask.classList.toggle('complete');
 
     let index;
     for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].name === clickedTask.value) {
+      if (tasks[i].id === id) {
         index = i;
       }
     }
 
     const allTask = [...tasks];
-    e.target.classList.contains('complete') ? allTask[index].complete = true : allTask[index].complete = false;
+    clickedTask.classList.contains('complete') ? allTask[index].complete = true : allTask[index].complete = false;
     setTask(allTask);
   }
 
   const deleteTask = function (e) {
-    const clickedTask = e.target.parentNode.firstElementChild.firstElementChild;
+    const id = e.target.getAttribute('data-id');
 
     let index;
     for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].name === clickedTask.value) {
+      if (tasks[i].id === id) {
         index = i;
       }
     }
@@ -91,17 +93,19 @@ function Todo() {
   }
 
   const editTask = function (e) {
-    const clickedTask = e.target.parentNode.firstElementChild.firstElementChild;
+    const id = e.target.getAttribute('data-id');
 
+    const task = document.getElementsByClassName('js-task');
     let index;
-    for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].name === clickedTask.value) {
+    for (let i = 0; i < task.length; i++) {
+      if (task[i].getAttribute('data-id') === id) {
         index = i;
       }
     }
 
-    console.dir(clickedTask);
+    const clickedTask = task[index];
     clickedTask.disabled = false;
+    console.log(clickedTask.disabled);
     
     clickedTask.addEventListener('focusout', (e) => {
       clickedTask.disabled = true;
@@ -131,8 +135,8 @@ function Todo() {
             <tr key={task.id}>
               <td>
                 <TaskRow name={task.name} value={task.name} click={completedTask} change={handleChangeEditTask} dataId={task.id} />
-                <Button button="Edit" class="button js-edit" click={editTask} />
-                <Button button="Delete" class="button js-delete" click={deleteTask} /> 
+                <Button button="Edit" class="button js-edit" click={editTask} dataId={task.id} />
+                <Button button="Delete" class="button js-delete" click={deleteTask} dataId={task.id} /> 
               </td>
             </tr>
           ))
