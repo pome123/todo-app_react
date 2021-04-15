@@ -8,6 +8,8 @@ import Button from './Button';
 
 import generateId from './generateId';
 
+import './Todo.css';
+
 
 function Todo() {
   const [tasks, setTask] = useState([
@@ -54,6 +56,25 @@ function Todo() {
     }
   }
 
+  const completedTask = function (e) {
+    const clickedTask = e.target.parentNode.firstElementChild;
+    clickedTask.classList.toggle('complete')
+
+    let index;
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].name === clickedTask.value) {
+        index = i;
+      }
+    }
+
+    const allTask = [...tasks];
+
+    e.target.classList.contains('complete') ? allTask[index].complete = true : allTask[index].complete = false;
+
+    setTask(allTask);
+
+    console.log(tasks);
+  }
 
   const handleButtonClick = function (e) {
     const clickedTask = e.target.parentNode.firstElementChild;
@@ -95,7 +116,7 @@ function Todo() {
           tasks.map(task => (
             <tr key={task.id}>
               <td>
-                <TaskRow name={task.name} />
+                <TaskRow name={task.name} value={task.name} click={completedTask} />
                 <Button button="Edit" class="button js-edit" click={handleButtonClick} />
                 <Button button="Delete" class="button js-delete" click={handleButtonClick} /> 
               </td>

@@ -3,7 +3,9 @@ import './TaskRow.css';
 
 function TaskRow(props) {
   return (
-    <input className="task" type="text" value={props.name} disabled />
+    <span onClick={props.click}>
+      <input className="task js-task" name={props.name} type="text" value={props.value} disabled />
+    </span>
   );
 }
 
