@@ -29,7 +29,13 @@ function Todo() {
       complete: true,
     }
   ]);
+
+  // タスク追加用
   const [text, setText] = useState('');
+
+  // タスク修正用
+  // const [editText, setEditText] = useState('');
+  
 
   const handleChangeAddTask = function(e) {
     setText(e.target.value);
@@ -87,7 +93,7 @@ function Todo() {
       allTask.splice(index, 1);
       setTask(allTask);
       return;
-  }
+    }
 
     // if (e.target.classList.contains('js-edit') === true) {
     //   console.dir(clickedTask);
@@ -103,6 +109,12 @@ function Todo() {
     //   });
     // }
   }
+
+  // const handleChangeEditTask = function (e) {
+  //   setEditText(e.target.value);
+  // }
+
+
   return (
     <div className="Todo">
       <Title />
@@ -113,6 +125,7 @@ function Todo() {
             <tr key={task.id}>
               <td>
                 <TaskRow name={task.name} value={task.name} click={completedTask} />
+                {/* <TaskRow name={task.name} value={task.name} click={completedTask} change={handleChangeEditTask} /> */}
                 <Button button="Edit" class="button js-edit" click={handleButtonClick} />
                 <Button button="Delete" class="button js-delete" click={handleButtonClick} /> 
               </td>
