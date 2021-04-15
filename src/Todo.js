@@ -32,9 +32,6 @@ function Todo() {
 
   // タスク追加用
   const [text, setText] = useState('');
-
-  // タスク修正用
-  // const [editText, setEditText] = useState('');
   
 
   const handleChangeAddTask = function(e) {
@@ -78,7 +75,22 @@ function Todo() {
     setTask(allTask);
   }
 
-  const handleButtonClick = function (e) {
+  const deleteTask = function (e) {
+    const clickedTask = e.target.parentNode.firstElementChild.firstElementChild;
+
+    let index;
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].name === clickedTask.value) {
+        index = i;
+      }
+    }
+    const allTask = [...tasks];
+    allTask.splice(index, 1);
+    setTask(allTask);
+    return;
+  }
+
+  const editTask = function (e) {
     const clickedTask = e.target.parentNode.firstElementChild.firstElementChild;
 
     let index;
@@ -88,31 +100,25 @@ function Todo() {
       }
     }
 
-    if (e.target.classList.contains('js-delete') === true) {
-      const allTask = [...tasks];
-      allTask.splice(index, 1);
-      setTask(allTask);
-      return;
-    }
-
-    // if (e.target.classList.contains('js-edit') === true) {
-    //   console.dir(clickedTask);
-    //   clickedTask.disabled = false;
-
-    //   let edittedTask = tasks[index].name;
-    //   edittedTask = editText;
-    //   setTask([...tasks]);
-    //   setEditText(edittedTask)
-      
-    //   clickedTask.addEventListener('focusout', (e) => {
-    //     clickedTask.disabled = true;
-    //   });
-    // }
+    console.dir(clickedTask);
+    clickedTask.disabled = false;
+    
+    clickedTask.addEventListener('focusout', (e) => {
+      clickedTask.disabled = true;
+    });
   }
 
-  // const handleChangeEditTask = function (e) {
-  //   setEditText(e.target.value);
-  // }
+  const handleChangeEditTask = function (e) {
+    console.log(e);
+    const id = e.target.getAttribute('data-id');
+
+    setTask(tasks.map((task) => {
+      if (task.id === id) {
+        task.name = e.target.value;
+      }
+      return task;
+    }));
+  }
 
 
   return (
@@ -124,10 +130,9 @@ function Todo() {
           tasks.map(task => (
             <tr key={task.id}>
               <td>
-                <TaskRow name={task.name} value={task.name} click={completedTask} />
-                {/* <TaskRow name={task.name} value={task.name} click={completedTask} change={handleChangeEditTask} /> */}
-                <Button button="Edit" class="button js-edit" click={handleButtonClick} />
-                <Button button="Delete" class="button js-delete" click={handleButtonClick} /> 
+                <TaskRow name={task.name} value={task.name} click={completedTask} change={handleChangeEditTask} dataId={task.id} />
+                <Button button="Edit" class="button js-edit" click={editTask} />
+                <Button button="Delete" class="button js-delete" click={deleteTask} /> 
               </td>
             </tr>
           ))
