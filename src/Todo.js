@@ -50,8 +50,8 @@ function Todo() {
     setTask(allTask);
   }
 
-  const deleteTask = function (e) {
-    const id = e.target.getAttribute('data-id');
+  const deleteTask = function (id) {
+    const allTask = [...tasks];
 
     let index;
     for (let i = 0; i < tasks.length; i++) {
@@ -59,7 +59,7 @@ function Todo() {
         index = i;
       }
     }
-    const allTask = [...tasks];
+
     allTask.splice(index, 1);
     setTask(allTask);
     return;
