@@ -40,21 +40,13 @@ function Todo() {
     ]);
   }
 
-  const completedTask = function (e) {
-    const clickedTask = e.target;
-    const id = clickedTask.getAttribute('data-id');
-
-    clickedTask.classList.toggle('complete');
-
-    let index;
-    for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].id === id) {
-        index = i;
-      }
-    }
-
+  const completedTask = function (id) {
     const allTask = [...tasks];
-    clickedTask.classList.contains('complete') ? allTask[index].complete = true : allTask[index].complete = false;
+    tasks.map((task) => {
+      if (task.id === id) {
+        return task.complete ? task.complete = false : task.complete = true;
+      }
+    });
     setTask(allTask);
   }
 
