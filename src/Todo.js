@@ -30,33 +30,15 @@ function Todo() {
     }
   ]);
 
-  // タスク追加用
-  const [text, setText] = useState('');
-  
-
-  const handleChangeAddTask = function(e) {
-    setText(e.target.value);
-  }
-
-  const AddTask = function(e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-
-      if (text === '') {
-        return;
+  const AddTask = function(text) {
+    setTask([
+      ...tasks,
+      {
+        id: generateId(),
+        name: text,
+        complete: false,
       }
-
-      setTask([
-        ...tasks,
-        {
-          id: generateId(),
-          name: text,
-          complete: false,
-        }
-      ]);
-
-      setText('');
-    }
+    ]);
   }
 
   const completedTask = function (e) {
@@ -126,7 +108,7 @@ function Todo() {
   return (
     <div className="Todo">
       <Title />
-      <AddTaskBar value={text} change={handleChangeAddTask} keyPress={AddTask}  />
+      <AddTaskBar updateData={AddTask}  />
       <TaskTable>
         {
           tasks.map(task => (
