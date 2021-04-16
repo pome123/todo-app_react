@@ -4,7 +4,6 @@ import Title from './Title';
 import AddTaskBar from './AddTaskBar';
 import TaskTable from './TaskTable';
 import TaskRow from './TaskRow';
-import Button from './Button';
 
 import generateId from './generateId';
 
@@ -112,13 +111,21 @@ function Todo() {
       <TaskTable>
         {
           tasks.map(task => (
-            <tr key={task.id}>
-              <td>
-                <TaskRow name={task.name} value={task.name} click={completedTask} change={handleChangeEditTask} dataId={task.id} />
-                <Button button="Edit" class="button js-edit" click={editTask} dataId={task.id} />
-                <Button button="Delete" class="button js-delete" click={deleteTask} dataId={task.id} /> 
-              </td>
-            </tr>
+            <TaskRow
+              key={task.id}
+              task={task}
+              taskClick={completedTask}
+              editClick={editTask}
+              deleteClick={deleteTask}
+              change={handleChangeEditTask}
+            />
+            // <tr key={task.id}>
+            //   <td>
+            //     <TaskRow name={task.name} value={task.name} click={completedTask} change={handleChangeEditTask} dataId={task.id} />
+            //     <Button button="Edit" class="button js-edit" click={editTask} dataId={task.id} />
+            //     <Button button="Delete" class="button js-delete" click={deleteTask} dataId={task.id} /> 
+            //   </td>
+            // </tr>
           ))
         }
       </TaskTable>
