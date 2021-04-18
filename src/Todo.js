@@ -63,17 +63,15 @@ function Todo() {
     setTask(allTask);
   }
 
-  const editTask = function (e) {
-    const id = e.target.getAttribute('data-id');
+  const editTask = function (id) {
+    let index;
+    tasks.map((task, i) => {
+      if (task.id === id) {
+        return index = i;
+      }
+    });
 
     const task = document.getElementsByClassName('js-task');
-    let index;
-    for (let i = 0; i < task.length; i++) {
-      if (task[i].getAttribute('data-id') === id) {
-        index = i;
-      }
-    }
-
     const clickedTask = task[index];
     clickedTask.disabled = false;
     
@@ -82,12 +80,12 @@ function Todo() {
     });
   }
 
-  const handleChangeEditTask = function (e) {
-    const id = e.target.getAttribute('data-id');
+  const editChange = function (id) {
+    const jsTask = document.getElementsByClassName('js-task');
 
-    setTask(tasks.map((task) => {
+    setTask(tasks.map((task, index) => {
       if (task.id === id) {
-        task.name = e.target.value;
+        task.name = jsTask[index].value;
       }
       return task;
     }));
@@ -107,7 +105,7 @@ function Todo() {
               taskClick={completedTask}
               editClick={editTask}
               deleteClick={deleteTask}
-              change={handleChangeEditTask}
+              editChange={editChange}
             />
             // <tr key={task.id}>
             //   <td>
