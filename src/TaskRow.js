@@ -10,12 +10,12 @@ function TaskRow(props) {
   const handleOnClick = () => {
     const id = task.id;
     // console.log('TaskRow:', id);
-    props.taskClick(id)
+    props.taskClick(id);
   }
   
   const handleDeleteClick = () => {
     const id = task.id;
-    props.deleteClick(id)
+    props.deleteClick(id);
   } 
 
   return (
