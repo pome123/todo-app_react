@@ -9,7 +9,6 @@ function TaskRow(props) {
 
   const handleOnClick = () => {
     const id = task.id;
-    // console.log('TaskRow:', id);
     props.taskClick(id);
   }
   

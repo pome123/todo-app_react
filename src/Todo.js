@@ -107,13 +107,6 @@ function Todo() {
               deleteClick={deleteTask}
               editChange={editChange}
             />
-            // <tr key={task.id}>
-            //   <td>
-            //     <TaskRow name={task.name} value={task.name} click={completedTask} change={handleChangeEditTask} dataId={task.id} />
-            //     <Button button="Edit" class="button js-edit" click={editTask} dataId={task.id} />
-            //     <Button button="Delete" class="button js-delete" click={deleteTask} dataId={task.id} /> 
-            //   </td>
-            // </tr>
           ))
         }
       </TaskTable>
