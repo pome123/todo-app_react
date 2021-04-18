@@ -15,7 +15,6 @@ function TaskRow(props) {
   
   const handleDeleteClick = () => {
     const id = task.id;
-    // console.log('TaskRow:', id);
     props.deleteClick(id)
   } 
 
@@ -26,7 +25,7 @@ function TaskRow(props) {
           <input className="task js-task" name={task.name} type="text" value={task.name} onChange={props.change} disabled />
         </span>
         <Button button="Edit" class="button js-edit" click={props.editClick} dataId={task.id} />
-        <Button button="Delete" class="button js-delete" click={handleDeleteClick} dataId={task.id} /> 
+        <Button button="Delete" class="button js-delete" click={handleDeleteClick} /> 
       </td>
     </tr>
   );

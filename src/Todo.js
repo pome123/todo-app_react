@@ -51,18 +51,16 @@ function Todo() {
   }
 
   const deleteTask = function (id) {
-    const allTask = [...tasks];
-
     let index;
-    for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].id === id) {
-        index = i;
+    tasks.map((task, i) => {
+      if (task.id === id) {
+        return index = i;
       }
-    }
+    });
 
+    const allTask = [...tasks];
     allTask.splice(index, 1);
     setTask(allTask);
-    return;
   }
 
   const editTask = function (e) {
