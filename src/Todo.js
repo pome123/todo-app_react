@@ -73,9 +73,11 @@ function Todo() {
 
     const task = document.getElementsByClassName('js-task');
     const clickedTask = task[index];
+
     clickedTask.disabled = false;
+    clickedTask.focus();
     
-    clickedTask.addEventListener('focusout', (e) => {
+    clickedTask.addEventListener('focusout', () => {
       clickedTask.disabled = true;
     });
   }
