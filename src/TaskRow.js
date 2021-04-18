@@ -7,7 +7,7 @@ function TaskRow(props) {
 
   const { task } = props;
 
-  const handleOnClick = () => {
+  const handleTaskClick = () => {
     const id = task.id;
     props.taskClick(id);
   }
@@ -30,7 +30,7 @@ function TaskRow(props) {
   return (
     <tr>
       <td>
-        <span className={task.complete ? 'complete' : ''} onClick={handleOnClick}>
+        <span className={task.complete ? 'complete' : ''} onClick={handleTaskClick}>
           <input className="task js-task" name={task.name} type="text" value={task.name} onChange={handleChange} disabled />
         </span>
         <Button button="Edit" class="button js-edit" click={handleEditClick} />
