@@ -30,8 +30,8 @@ function TaskRow(props) {
   return (
     <tr>
       <td>
-        <span className={task.complete ? 'complete' : ''} onClick={handleTaskClick}>
-          <input className="task js-task" name={task.name} type="text" value={task.name} onChange={handleChange} disabled />
+        <span onClick={handleTaskClick}>
+          <input className={task.complete ? 'task js-task complete' : 'task js-task'} type="text" value={task.name} onChange={handleChange} disabled />
         </span>
         <Button button="Edit" class="button js-edit" click={handleEditClick} />
         <Button button="Delete" class="button js-delete" click={handleDeleteClick} /> 
