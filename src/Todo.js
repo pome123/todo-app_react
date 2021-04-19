@@ -41,42 +41,48 @@ function Todo() {
   }
 
   const completedTask = function (id) {
-    const allTask = [...tasks];
-    tasks.map((task) => {
+    tasks.map((task, index) => {
       if (task.id === id) {
-        return task.complete ? task.complete = false : task.complete = true;
+        // タスク編集時
+        const clickedTask = document.getElementsByClassName('js-task')[index];
+        if (clickedTask.disabled === false) {
+          return task;
+        }
+        task.complete ? task.complete = false : task.complete = true;
       }
+
+      return task;
     });
+
+    const allTask = [...tasks];
     setTask(allTask);
   }
 
   const deleteTask = function (id) {
-    let index;
-    tasks.map((task, i) => {
+    const allTask = [...tasks];
+
+    tasks.map((task, index) => {
       if (task.id === id) {
-        return index = i;
+        allTask.splice(index, 1);
       }
+      return setTask(allTask);
     });
 
-    const allTask = [...tasks];
-    allTask.splice(index, 1);
-    setTask(allTask);
+    
   }
 
   const editTask = function (id) {
-    let index;
-    tasks.map((task, i) => {
+    let clickedTask;
+    tasks.map((task, index) => {
       if (task.id === id) {
-        return index = i;
+        clickedTask = document.getElementsByClassName('js-task')[index];
       }
+      return clickedTask;
     });
-
-    const task = document.getElementsByClassName('js-task');
-    const clickedTask = task[index];
 
     clickedTask.disabled = false;
     clickedTask.focus();
-    
+
     clickedTask.addEventListener('focusout', () => {
       clickedTask.disabled = true;
     });
