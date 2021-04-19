@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
+// component
 import Title from './Title';
 import AddTaskBar from './AddTaskBar';
 import TaskTable from './TaskTable';
 import TaskRow from './TaskRow';
 
+// function
 import generateId from './generateId';
-
-// import './Todo.css';
 
 
 function Todo() {

@@ -1,5 +1,7 @@
+// component
 import Button from './Button';
 
+// css
 import './TaskRow.css';
 
 
