@@ -1,7 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+
+// component
 import Todo from './Todo';
+
+// css
+import './index.css';
+
 
 ReactDOM.render(
   <Todo />,

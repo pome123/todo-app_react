@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
+// component
 import Title from './Title';
 import AddTaskBar from './AddTaskBar';
 import TaskTable from './TaskTable';
 import TaskRow from './TaskRow';
-import Button from './Button';
 
+// function
 import generateId from './generateId';
 
 
@@ -27,47 +28,93 @@ function Todo() {
       complete: true,
     }
   ]);
-  const [text, setText] = useState('');
 
-  const handleChange = function(e) {
-    setText(e.target.value);
-  }
-
-  const AddTask = function(e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-
-      if (text === '') {
-        return;
+  const AddTask = function(text) {
+    setTask([
+      ...tasks,
+      {
+        id: generateId(),
+        name: text,
+        complete: false,
       }
-      
-      setTask([
-        ...tasks,
-        {
-          id: generateId(),
-          name: text,
-          complete: false,
-        }
-      ]);
-
-      setText('');
-    }
+    ]);
   }
+
+  const completedTask = function (id) {
+    tasks.map((task, index) => {
+      if (task.id === id) {
+        // タスク編集時
+        const clickedTask = document.getElementsByClassName('js-task')[index];
+        if (clickedTask.disabled === false) {
+          return task;
+        }
+        task.complete ? task.complete = false : task.complete = true;
+      }
+
+      return task;
+    });
+
+    const allTask = [...tasks];
+    setTask(allTask);
+  }
+
+  const deleteTask = function (id) {
+    const allTask = [...tasks];
+
+    tasks.map((task, index) => {
+      if (task.id === id) {
+        allTask.splice(index, 1);
+      }
+      return setTask(allTask);
+    });
+
+    
+  }
+
+  const editTask = function (id) {
+    let clickedTask;
+    tasks.map((task, index) => {
+      if (task.id === id) {
+        clickedTask = document.getElementsByClassName('js-task')[index];
+      }
+      return clickedTask;
+    });
+
+    clickedTask.disabled = false;
+    clickedTask.focus();
+
+    clickedTask.addEventListener('focusout', () => {
+      clickedTask.disabled = true;
+    });
+  }
+
+  const editChange = function (id) {
+    const jsTask = document.getElementsByClassName('js-task');
+
+    setTask(tasks.map((task, index) => {
+      if (task.id === id) {
+        task.name = jsTask[index].value;
+      }
+      return task;
+    }));
+  }
+
 
   return (
     <div className="Todo">
       <Title />
-      <AddTaskBar value={text} change={handleChange} keyPress={AddTask}  />
+      <AddTaskBar updateData={AddTask}  />
       <TaskTable>
         {
           tasks.map(task => (
-            <tr key={task.id}>
-              <td>
-                <TaskRow name={task.name} />
-                <Button button="Edit" />
-                <Button button="Delete" /> 
-              </td>
-            </tr>
+            <TaskRow
+              key={task.id}
+              task={task}
+              taskClick={completedTask}
+              editClick={editTask}
+              deleteClick={deleteTask}
+              editChange={editChange}
+            />
           ))
         }
       </TaskTable>
